@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    image: mediawiki:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./images:/var/www/html/images      
+      # Save LocalSettings.php to current directory, uncomment
+      # the following and update stack service
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+  database:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: 'my_wiki'
+      MYSQL_USER: 'wikiuser'
+      MYSQL_PASSWORD: 'example'
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - ./database:/var/lib/mysql
